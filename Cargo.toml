@@ -1,0 +1,76 @@
+[package]
+name = "wifiess"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "A remarkable WiFi manager for the terminal"
+license = "MIT"
+readme = "README.md"
+
+[dependencies]
+# Runtime — single async runtime for UI, D-Bus, and timers
+tokio = { version = "1.42", features = ["full"] }
+
+# TUI — terminal rendering framework + backend
+ratatui = "0.29"
+crossterm = { version = "0.28", features = ["event-stream"] }
+
+# Streams — merging async event sources
+futures = "0.3"
+tokio-stream = "0.1"
+
+# D-Bus — NetworkManager communication
+zbus = { version = "5.5", default-features = false, features = ["tokio"] }
+
+# Errors — typed errors + pretty backtraces
+thiserror = "2.0"
+color-eyre = "0.6"
+
+# Logging — structured, file-only logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-appender = "0.2"
+
+# Config — TOML configuration files
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+directories = "6.0"
+
+# Text input — password and SSID prompts
+tui-input = "0.11"
+
+# Secrets — zeroizable secret storage
+secrecy = { version = "0.10", features = ["serde"] }
+zeroize = "1.8"
+
+# CLI — argument parsing
+clap = { version = "4.5", features = ["derive"] }
+
+[dev-dependencies]
+# Snapshot testing
+insta = { version = "1.41", features = ["yaml"] }
+
+[lints.rust]
+dead_code = "allow"
+
+[lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+# Allow common patterns that are either intentional or pedantic ergonomics
+module_name_repetitions = "allow"
+must_use_candidate = "allow"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+struct_excessive_bools = "allow"
+too_many_lines = "allow"
+cast_possible_truncation = "allow"
+cast_sign_loss = "allow"
+cast_precision_loss = "allow"
+match_same_arms = "allow"
+trivially_copy_pass_by_ref = "allow"
+struct_field_names = "allow"
+float_cmp = "allow"
+
+[profile.release]
+lto = true
+strip = true
