@@ -1,6 +1,7 @@
 //! Top-level UI layout and view renderer.
 
 pub mod anim;
+pub mod bar;
 pub mod confirm;
 pub mod detail;
 pub mod help;
@@ -8,7 +9,6 @@ pub mod nwlist;
 pub mod password;
 pub mod schart;
 pub mod spectrum;
-pub mod status_bar;
 pub mod theme;
 pub mod toast;
 
@@ -109,7 +109,7 @@ pub fn view(state: &State, area: Rect, buf: &mut Buffer) {
         LayoutMode::TooSmall => unreachable!(),
     }
 
-    status_bar::render_status_bar(state, theme, status_area, buf);
+    bar::render_status_bar(state, theme, status_area, buf);
 
     if let Some(ref popup) = state.popup {
         match popup {

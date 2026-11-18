@@ -66,11 +66,14 @@ Rules:
 ## 3. Commands
 
 ```bash
-cargo run                          # run the app (logs go to the log file, not the terminal)
-cargo build --release
-cargo fmt --all
-cargo clippy --all-targets -- -D warnings
-cargo test                         # unit + snapshot tests
+make help                          # list all helper commands
+make run                           # run the app (logs go to file)
+make demo                          # run with fake backend for UI testing
+make check                         # fmt-check + clippy + test
+make fmt                           # format code
+make lint                          # run clippy with -D warnings
+make test                          # unit + snapshot tests
+make build-release                 # release build
 cargo insta review                 # review changed snapshots
 ```
 
@@ -161,14 +164,15 @@ src/
     ├── mod.rs           # top-level layout + view()
     ├── theme.rs         # palettes, color ramps, color-depth fallback
     ├── anim.rs          # easing, tweens, spinner/radar frames
-    ├── network_list.rs
-    ├── detail.rs
-    ├── signal_chart.rs  # per-network history
+    ├── nwlist.rs        # access point list view
+    ├── detail.rs        # selected network details
+    ├── schart.rs        # per-network history sparkline
     ├── spectrum.rs      # channel/band view
     ├── password.rs      # input popup
+    ├── confirm.rs       # modal confirmations (e.g. forget network)
     ├── toast.rs         # transient notifications
-    ├── status_bar.rs
-    └── help.rs
+    ├── bar.rs           # bottom status bar
+    └── help.rs          # keyboard shortcuts overlay
 tests/                   # snapshot tests per screen/size
 ```
 
